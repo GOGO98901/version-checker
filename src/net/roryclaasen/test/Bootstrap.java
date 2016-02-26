@@ -15,9 +15,22 @@ limitations under the License.
  */
 package net.roryclaasen.test;
 
+import net.roryclaasen.githubcheck.VersionCheck;
+
 public class Bootstrap {
 
 	public static void main(String[] args) {
+		VersionCheck version = new VersionCheck("GOGO98901", "RorysMod", "1.2.4");
 
+		try {
+			String[] tags = version.getTagList();
+			if (tags != null) {
+				for (String tag : tags) {
+					System.out.println("Tag: " + tag);
+				}
+			} else System.err.println("Tags are null");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

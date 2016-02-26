@@ -15,6 +15,35 @@ limitations under the License.
  */
 package net.roryclaasen.githubcheck;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 public class VersionCheck {
 
+	private GithubBack github;
+	private String currentVersion;
+
+	public VersionCheck(String username, String repository, String currentVersion) {
+		this.github = new GithubBack(username, repository);
+		this.currentVersion = currentVersion;
+	}
+
+	public final String[] getTagList() throws Exception {
+		String json = new Reader(github.getUrlTags()).get();
+		if (json != null) {
+			JSONParser parser = new JSONParser();
+			JSONArray jsonArray = (JSONArray) (Object) parser.parse(json);
+			String[] tags = new String[jsonArray.size()];
+			for (int i = 0; i < jsonArray.size(); i++) {
+				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+				tags[i] = (String) jsonObject.get("name");
+			}
+			return tags;
+		} else throw new Exception("No data received");
+	}
+
+	public String getCurrentVersion() {
+		return currentVersion;
+	}
 }
