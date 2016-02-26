@@ -40,6 +40,10 @@ public class GithubBack {
 		return getUrl() + "/tags";
 	}
 
+	public String getUrlReleases() {
+		return getUrl() + "/releases";
+	}
+
 	public String getUrlIssues() {
 		return getUrl() + "/issues";
 	}

@@ -15,6 +15,7 @@ limitations under the License.
  */
 package net.roryclaasen.test;
 
+import net.roryclaasen.githubcheck.Release;
 import net.roryclaasen.githubcheck.VersionCheck;
 
 public class Bootstrap {
@@ -22,6 +23,7 @@ public class Bootstrap {
 	public static void main(String[] args) {
 		VersionCheck version = new VersionCheck("GOGO98901", "RorysMod", "1.2.4");
 
+		System.out.println("Tag check");
 		try {
 			String[] tags = version.getTagList();
 			if (tags != null) {
@@ -29,6 +31,31 @@ public class Bootstrap {
 					System.out.println("Tag: " + tag);
 				}
 			} else System.err.println("Tags are null");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(System.getProperty("line.separator") + "Release check");
+		try {
+			System.out.println("Latest when set to fales");
+			Release latest = version.getLatestVersion(false);
+			System.out.println("Release: " + latest.getName());
+
+			System.out.println("Latest when set to true");
+			latest = version.getLatestVersion(true);
+			System.out.println("Release: " + latest.getName());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println(System.getProperty("line.separator") + "Release list");
+		try {
+			Release[] releases = version.getReleasesList();
+			if (releases != null) {
+				for (Release release : releases) {
+					System.out.println("Release: " + release.getName());
+					System.out.println("Url: " + release.getUrl());
+					System.out.println("Pre-Release: " + release.isPreRelease());
+				}
+			} else System.err.println("Releases are null");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
