@@ -6,3 +6,7 @@
 
 # include libs
 !lib/
+
+# include git important files
+!.gitmodules
+!.gitignore
