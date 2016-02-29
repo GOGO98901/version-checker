@@ -1,5 +1,7 @@
 # exclude all
 /*
+# include mnarkdown
+!LICENSE
 
 # include sourcecode
 !src/
