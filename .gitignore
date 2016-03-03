@@ -1,16 +1,14 @@
-*.classpath
-*.project
+# exclude all
+/*
+# include mnarkdown
+!LICENSE
 
-*.class
+# include sourcecode
+!src/
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# include libs
+!lib/
 
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-/bin/
+# include git important files
+!.gitmodules
+!.gitignore
