@@ -95,7 +95,7 @@ public class VersionCheck {
 	/**
 	 * 
 	 * @param preRelease
-	 *            if set to true then pre releaess will be included
+	 *            if set to true then pre-releases will be included
 	 * @return if the current tag is equal to the latest release tag
 	 */
 	public boolean checkRelease(boolean preRelease) {
@@ -105,6 +105,41 @@ public class VersionCheck {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	/**
+	 * This function can only be used if both the <b>currentVersion</b> and the version on GitHub.com are using the version format <i>x.x.x</i>
+	 * <br>example:
+	 * <br>current version = 1.2.4
+	 * <br>latest version = 1.3.1
+	 * <br>This function would return true
+	 * @param full
+	 *            If set to true then it will check each number individually
+	 * @param preRelease
+	 *            if the current tag is equal to the latest release tag
+	 * @return if the current tag is equal to the latest release tag
+	 */
+	public boolean checkRelease(boolean full, boolean preRelease) {
+		if (!full) return checkRelease(preRelease);
+		try {
+			String[] latest = getLatestVersion(preRelease).getTagName().split(".");
+			String[] current = currentVersion.split(".");
+			if (isHigher(current[0], latest[0])) return true;
+			else {
+				if (isHigher(current[1], latest[1])) return true;
+				else return isHigher(current[2], latest[2]);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	private boolean isHigher(String current, String latest) throws NumberFormatException {
+		if (current == null || latest == null) return false;
+		int int1 = Integer.parseInt(current);
+		int int2 = Integer.parseInt(latest);
+		return int1 > int2;
 	}
 
 	/**
