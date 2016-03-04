@@ -30,9 +30,8 @@ public class Reader {
 	}
 
 	public String get() throws IOException {
-		URL url;
 		try {
-			url = new URL(this.url);
+			URL url = new URL(this.url);
 			URLConnection conn = url.openConnection();
 			BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 			String inputLine, data = "";

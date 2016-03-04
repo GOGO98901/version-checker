@@ -15,6 +15,9 @@ limitations under the License.
  */
 package net.roryclaasen.githubcheck;
 
+import net.roryclaasen.githubcheck.data.Release;
+import net.roryclaasen.githubcheck.data.Tag;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -69,15 +72,15 @@ public class VersionCheck {
 		} else throw new Exception("No data received");
 	}
 
-	public final String[] getTagList() throws Exception {
+	public final Tag[] getTagList() throws Exception {
 		String json = new Reader(github.getUrlTags()).get();
 		if (json != null) {
 			JSONParser parser = new JSONParser();
 			JSONArray jsonArray = (JSONArray) (Object) parser.parse(json);
-			String[] tags = new String[jsonArray.size()];
+			Tag[] tags = new Tag[jsonArray.size()];
 			for (int i = 0; i < jsonArray.size(); i++) {
 				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-				tags[i] = (String) jsonObject.get("name");
+				tags[i] = new Tag(jsonObject);
 			}
 			return tags;
 		} else throw new Exception("No data received");
@@ -88,8 +91,8 @@ public class VersionCheck {
 	 * 
 	 * @return if the current tag is equal to the latest release tag
 	 */
-	public boolean checkRelease() {
-		return checkRelease(false);
+	public boolean isLatestRelease() {
+		return isLatestRelease(false);
 	}
 
 	/**
@@ -98,7 +101,7 @@ public class VersionCheck {
 	 *            if set to true then pre-releases will be included
 	 * @return if the current tag is equal to the latest release tag
 	 */
-	public boolean checkRelease(boolean preRelease) {
+	public boolean isLatestRelease(boolean preRelease) {
 		try {
 			return currentVersion.equals(getLatestVersion(preRelease).getTagName());
 		} catch (Exception e) {
@@ -108,26 +111,27 @@ public class VersionCheck {
 	}
 
 	/**
-	 * This function can only be used if both the <b>currentVersion</b> and the version on GitHub.com are using the version format <i>x.x.x</i>
-	 * <br>example:
-	 * <br>current version = 1.2.4
-	 * <br>latest version = 1.3.1
-	 * <br>This function would return true
+	 * This function can only be used if both the <b>currentVersion</b> and the version on GitHub.com are using the version format <i>x.x.x</i> <br>
+	 * example: <br>
+	 * current version = 1.2.4 <br>
+	 * latest version = 1.3.1 <br>
+	 * This function would return true
+	 * 
 	 * @param full
 	 *            If set to true then it will check each number individually
 	 * @param preRelease
 	 *            if the current tag is equal to the latest release tag
 	 * @return if the current tag is equal to the latest release tag
 	 */
-	public boolean checkRelease(boolean full, boolean preRelease) {
-		if (!full) return checkRelease(preRelease);
+	public boolean isLatestRelease(boolean full, boolean preRelease) {
+		if (!full) return isLatestRelease(preRelease);
 		try {
-			String[] latest = getLatestVersion(preRelease).getTagName().split(".");
+			String[] remote = getLatestVersion(preRelease).getTagName().split(".");
 			String[] current = currentVersion.split(".");
-			if (isHigher(current[0], latest[0])) return true;
+			if (isHigher(current[0], remote[0])) return true;
 			else {
-				if (isHigher(current[1], latest[1])) return true;
-				else return isHigher(current[2], latest[2]);
+				if (isHigher(current[1], remote[1])) return true;
+				else return isHigher(current[2], remote[2]);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -135,11 +139,11 @@ public class VersionCheck {
 		}
 	}
 
-	private boolean isHigher(String current, String latest) throws NumberFormatException {
-		if (current == null || latest == null) return false;
-		int int1 = Integer.parseInt(current);
-		int int2 = Integer.parseInt(latest);
-		return int1 > int2;
+	private boolean isHigher(String current, String remote) throws NumberFormatException {
+		if (current == null || remote == null) return false;
+		int currentInt = Integer.parseInt(current);
+		int remoteInt = Integer.parseInt(remote);
+		return currentInt >= remoteInt;
 	}
 
 	/**
@@ -147,7 +151,7 @@ public class VersionCheck {
 	 * 
 	 * @return if the current tag is equal to the latest tag
 	 */
-	public boolean checkTag() {
+	public boolean isLatestTag() {
 		try {
 			return currentVersion.equals(getTagList()[0]);
 		} catch (Exception e) {
@@ -162,5 +166,13 @@ public class VersionCheck {
 	 */
 	public String getCurrentVersion() {
 		return currentVersion;
+	}
+
+	/**
+	 * 
+	 * @return the data used to pass in at initialisation
+	 */
+	public GithubBack getGithub() {
+		return github;
 	}
 }

@@ -32,18 +32,34 @@ public class GithubBack {
 		return repository;
 	}
 
+	/**
+	 * 
+	 * @return api.github.com/repos/<b>username</b>/<b>repository</b>
+	 */
 	public String getUrl() {
 		return "https://api.github.com/repos/" + username + "/" + repository;
 	}
 
+	/**
+	 * 
+	 * @return api.github.com/repos/<b>username</b>/<b>repository</b>/tags
+	 */
 	public String getUrlTags() {
 		return getUrl() + "/tags";
 	}
 
+	/**
+	 * 
+	 * @return api.github.com/repos/<b>username</b>/<b>repository</b>/releases
+	 */
 	public String getUrlReleases() {
 		return getUrl() + "/releases";
 	}
 
+	/**
+	 * This is not used in version check but provides the location on the issues json file
+	 * @return api.github.com/repos/<b>username</b>/<b>repository</b>/issues
+	 */
 	public String getUrlIssues() {
 		return getUrl() + "/issues";
 	}
