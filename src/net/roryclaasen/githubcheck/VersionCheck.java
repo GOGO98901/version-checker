@@ -17,6 +17,7 @@ package net.roryclaasen.githubcheck;
 
 import net.roryclaasen.githubcheck.data.Release;
 import net.roryclaasen.githubcheck.data.Tag;
+import net.roryclaasen.util.Reader;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
