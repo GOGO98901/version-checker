@@ -20,8 +20,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 
 public class Reader {
+
+	private int attemptCount = 0;
 
 	private String url;
 
@@ -29,7 +33,8 @@ public class Reader {
 		this.url = url;
 	}
 
-	public String get() throws IOException {
+	public String get() throws IOException, KeyManagementException, NoSuchAlgorithmException {
+		attemptCount++;
 		try {
 			URL url = new URL(this.url);
 			URLConnection conn = url.openConnection();
@@ -40,7 +45,16 @@ public class Reader {
 			}
 			return data;
 		} catch (IOException e) {
+			if (attemptCount == 1) {
+				if (Trust.hasBeenApplied()) throw e;
+				Trust.applyTrustFix();
+				return get();
+			}
 			throw e;
 		}
+	}
+
+	public int getNumberOfAttempts() {
+		return attemptCount;
 	}
 }

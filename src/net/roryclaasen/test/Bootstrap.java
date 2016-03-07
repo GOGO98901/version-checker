@@ -27,9 +27,9 @@ public class Bootstrap {
 		System.out.println();
 
 		VersionCheck version = new VersionCheck("GOGO98901", "RorysMod", "1.2.4");
-		System.out.println("Username set to: " + version.getGithub().getUsername());
+		System.out.println("  Username set to: " + version.getGithub().getUsername());
 		System.out.println("Repository set to: " + version.getGithub().getRepository());
-		System.out.println("   Version set to:" + version.getCurrentVersion());
+		System.out.println("   Version set to: " + version.getCurrentVersion());
 
 		tagCheck(version);
 		System.out.println();
