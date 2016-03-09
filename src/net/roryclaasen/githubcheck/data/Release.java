@@ -17,11 +17,11 @@ package net.roryclaasen.githubcheck.data;
 
 import net.roryclaasen.util.exception.TagNotFoundException;
 
-import org.json.simple.JSONObject;
+import com.google.gson.JsonObject;
 
 public class Release extends JSONData {
 
-	public Release(JSONObject object) {
+	public Release(JsonObject object) {
 		super(object);
 	}
 
@@ -29,24 +29,24 @@ public class Release extends JSONData {
 	private boolean preRelease;
 
 	@Override
-	protected void load(JSONObject object) throws TagNotFoundException {
+	protected void load(JsonObject object) throws TagNotFoundException {
 		if (hasKey("url")) {
-			url = (String) object.get("url");
+			url = object.get("url").getAsString();
 		} else {
 			throw new TagNotFoundException("Key not found (url)");
 		}
 		if (hasKey("name")) {
-			name = (String) object.get("name");
+			name = object.get("name").getAsString();
 		} else {
 			throw new TagNotFoundException("Key not found (name)");
 		}
 		if (hasKey("tag_name")) {
-			tagName = (String) object.get("tag_name");
+			tagName = object.get("tag_name").getAsString();
 		} else {
 			throw new TagNotFoundException("Key not found (tag_name)");
 		}
 		if (hasKey("prerelease")) {
-			preRelease = (Boolean) object.get("prerelease");
+			preRelease = object.get("prerelease").getAsBoolean();
 		} else {
 			throw new TagNotFoundException("Key not found (prerelease)");
 		}

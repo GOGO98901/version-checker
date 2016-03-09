@@ -19,9 +19,9 @@ import net.roryclaasen.githubcheck.data.Release;
 import net.roryclaasen.githubcheck.data.Tag;
 import net.roryclaasen.util.Reader;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class VersionCheck {
 
@@ -62,11 +62,11 @@ public class VersionCheck {
 	public final Release[] getReleasesList() throws Exception {
 		String json = new Reader(github.getUrlReleases()).get();
 		if (json != null) {
-			JSONParser parser = new JSONParser();
-			JSONArray jsonArray = (JSONArray) (Object) parser.parse(json);
+			JsonParser parser = new JsonParser();
+			JsonArray jsonArray = (JsonArray)  parser.parse(json);
 			Release[] releases = new Release[jsonArray.size()];
 			for (int i = 0; i < jsonArray.size(); i++) {
-				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+				JsonObject jsonObject = (JsonObject) jsonArray.get(i);
 				releases[i] = new Release(jsonObject);
 			}
 			return releases;
@@ -76,11 +76,11 @@ public class VersionCheck {
 	public final Tag[] getTagList() throws Exception {
 		String json = new Reader(github.getUrlTags()).get();
 		if (json != null) {
-			JSONParser parser = new JSONParser();
-			JSONArray jsonArray = (JSONArray) (Object) parser.parse(json);
+			JsonParser parser = new JsonParser();
+			JsonArray jsonArray = (JsonArray) (Object) parser.parse(json);
 			Tag[] tags = new Tag[jsonArray.size()];
 			for (int i = 0; i < jsonArray.size(); i++) {
-				JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+				JsonObject jsonObject = (JsonObject) jsonArray.get(i);
 				tags[i] = new Tag(jsonObject);
 			}
 			return tags;

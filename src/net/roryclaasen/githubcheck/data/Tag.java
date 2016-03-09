@@ -17,30 +17,30 @@ package net.roryclaasen.githubcheck.data;
 
 import net.roryclaasen.util.exception.TagNotFoundException;
 
-import org.json.simple.JSONObject;
+import com.google.gson.JsonObject;
 
 public class Tag extends JSONData {
 
 	private String name, zipball, tarball;
 
-	public Tag(JSONObject object) {
+	public Tag(JsonObject object) {
 		super(object);
 	}
 
 	@Override
-	protected void load(JSONObject object) throws TagNotFoundException {
+	protected void load(JsonObject object) throws TagNotFoundException {
 		if (hasKey("name")) {
-			name = (String) object.get("name");
+			name = object.get("name").getAsString();
 		} else {
 			throw new TagNotFoundException("Key not found (name)");
 		}
 		if (hasKey("zipball_url")) {
-			zipball = (String) object.get("zipball_url");
+			zipball =  object.get("zipball_url").getAsString();
 		} else {
 			throw new TagNotFoundException("Key not found (zipball_url)");
 		}
 		if (hasKey("tarball_url")) {
-			tarball = (String) object.get("tarball_url");
+			tarball =  object.get("tarball_url").getAsString();
 		} else {
 			throw new TagNotFoundException("Key not found (tarball_url)");
 		}
