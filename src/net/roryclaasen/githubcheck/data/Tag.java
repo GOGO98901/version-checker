@@ -19,6 +19,9 @@ import net.roryclaasen.util.exception.TagNotFoundException;
 
 import org.json.simple.JSONObject;
 
+/**
+ * @author Rory Claasen
+ */
 public class Tag extends JSONData {
 
 	private String name, zipball, tarball;

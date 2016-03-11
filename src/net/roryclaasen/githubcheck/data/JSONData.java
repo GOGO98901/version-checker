@@ -4,7 +4,11 @@ import net.roryclaasen.util.exception.TagNotFoundException;
 
 import org.json.simple.JSONObject;
 
+/**
+ * @author Rory Claasen
+ */
 public abstract class JSONData {
+
 	private JSONObject object;
 
 	public JSONData(JSONObject object) {

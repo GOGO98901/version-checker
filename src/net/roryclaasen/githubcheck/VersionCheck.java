@@ -23,6 +23,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+/**
+ * @author Rory Claasen
+ */
 public class VersionCheck {
 
 	private GithubBack github;
