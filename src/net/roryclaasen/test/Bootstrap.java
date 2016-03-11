@@ -18,7 +18,9 @@ package net.roryclaasen.test;
 import net.roryclaasen.githubcheck.VersionCheck;
 import net.roryclaasen.githubcheck.data.Release;
 import net.roryclaasen.githubcheck.data.Tag;
-
+/**
+ * @author Rory Claasen
+ */
 public class Bootstrap {
 
 	public static void main(String[] args) {
@@ -26,6 +28,7 @@ public class Bootstrap {
 		System.out.println("A program by Rory Claasen");
 		System.out.println();
 
+		// You can change these to what ever you want for you're projects!
 		VersionCheck version = new VersionCheck("GOGO98901", "RorysMod", "1.2.4");
 		System.out.println("  Username set to: " + version.getGithub().getUsername());
 		System.out.println("Repository set to: " + version.getGithub().getRepository());

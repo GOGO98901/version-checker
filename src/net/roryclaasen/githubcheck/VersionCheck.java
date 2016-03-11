@@ -23,6 +23,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+/**
+ * @author Rory Claasen
+ */
 public class VersionCheck {
 
 	private GithubBack github;
@@ -63,7 +66,7 @@ public class VersionCheck {
 		String json = new Reader(github.getUrlReleases()).get();
 		if (json != null) {
 			JsonParser parser = new JsonParser();
-			JsonArray jsonArray = (JsonArray)  parser.parse(json);
+			JsonArray jsonArray = (JsonArray) parser.parse(json);
 			Release[] releases = new Release[jsonArray.size()];
 			for (int i = 0; i < jsonArray.size(); i++) {
 				JsonObject jsonObject = (JsonObject) jsonArray.get(i);

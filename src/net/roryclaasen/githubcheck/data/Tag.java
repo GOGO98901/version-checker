@@ -19,6 +19,9 @@ import net.roryclaasen.util.exception.TagNotFoundException;
 
 import com.google.gson.JsonObject;
 
+/**
+ * @author Rory Claasen
+ */
 public class Tag extends JSONData {
 
 	private String name, zipball, tarball;
@@ -35,12 +38,12 @@ public class Tag extends JSONData {
 			throw new TagNotFoundException("Key not found (name)");
 		}
 		if (hasKey("zipball_url")) {
-			zipball =  object.get("zipball_url").getAsString();
+			zipball = object.get("zipball_url").getAsString();
 		} else {
 			throw new TagNotFoundException("Key not found (zipball_url)");
 		}
 		if (hasKey("tarball_url")) {
-			tarball =  object.get("tarball_url").getAsString();
+			tarball = object.get("tarball_url").getAsString();
 		} else {
 			throw new TagNotFoundException("Key not found (tarball_url)");
 		}

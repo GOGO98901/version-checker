@@ -25,7 +25,9 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-
+/**
+ * @author Rory Claasen
+ */
 public class Trust {
 
 	private static boolean applied = false;

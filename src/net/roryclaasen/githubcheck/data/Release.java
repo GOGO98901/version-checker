@@ -18,7 +18,9 @@ package net.roryclaasen.githubcheck.data;
 import net.roryclaasen.util.exception.TagNotFoundException;
 
 import com.google.gson.JsonObject;
-
+/**
+ * @author Rory Claasen
+ */
 public class Release extends JSONData {
 
 	public Release(JsonObject object) {

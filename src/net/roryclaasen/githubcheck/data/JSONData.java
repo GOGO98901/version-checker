@@ -3,7 +3,9 @@ package net.roryclaasen.githubcheck.data;
 import net.roryclaasen.util.exception.TagNotFoundException;
 
 import com.google.gson.JsonObject;
-
+/**
+ * @author Rory Claasen
+ */
 public abstract class JSONData {
 	private JsonObject object;
 

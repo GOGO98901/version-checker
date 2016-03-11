@@ -22,7 +22,9 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-
+/**
+ * @author Rory Claasen
+ */
 public class Reader {
 
 	private int attemptCount = 0;

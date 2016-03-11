@@ -15,6 +15,9 @@ limitations under the License.
  */
 package net.roryclaasen.githubcheck;
 
+/**
+ * @author Rory Claasen
+ */
 public class GithubBack {
 
 	private final String username, repository;
@@ -58,6 +61,7 @@ public class GithubBack {
 
 	/**
 	 * This is not used in version check but provides the location on the issues json file
+	 * 
 	 * @return api.github.com/repos/<b>username</b>/<b>repository</b>/issues
 	 */
 	public String getUrlIssues() {
