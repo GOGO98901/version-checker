@@ -13,60 +13,51 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package net.roryclaasen.githubcheck.data;
-
-import net.roryclaasen.util.exception.TagNotFoundException;
+package me.roryclaasen.githubcheck.data;
 
 import com.google.gson.JsonObject;
+
+import me.roryclaasen.util.exception.TagNotFoundException;
+
 /**
  * @author Rory Claasen
  */
-public class Release extends JSONData {
+public class Tag extends JSONData {
 
-	public Release(JsonObject object) {
+	private String name, zipball, tarball;
+
+	public Tag(JsonObject object) {
 		super(object);
 	}
 
-	private String url, name, tagName;
-	private boolean preRelease;
-
 	@Override
 	protected void load(JsonObject object) throws TagNotFoundException {
-		if (hasKey("url")) {
-			url = object.get("url").getAsString();
-		} else {
-			throw new TagNotFoundException("Key not found (url)");
-		}
 		if (hasKey("name")) {
 			name = object.get("name").getAsString();
 		} else {
 			throw new TagNotFoundException("Key not found (name)");
 		}
-		if (hasKey("tag_name")) {
-			tagName = object.get("tag_name").getAsString();
+		if (hasKey("zipball_url")) {
+			zipball = object.get("zipball_url").getAsString();
 		} else {
-			throw new TagNotFoundException("Key not found (tag_name)");
+			throw new TagNotFoundException("Key not found (zipball_url)");
 		}
-		if (hasKey("prerelease")) {
-			preRelease = object.get("prerelease").getAsBoolean();
+		if (hasKey("tarball_url")) {
+			tarball = object.get("tarball_url").getAsString();
 		} else {
-			throw new TagNotFoundException("Key not found (prerelease)");
+			throw new TagNotFoundException("Key not found (tarball_url)");
 		}
-	}
-
-	public String getUrl() {
-		return url;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getTagName() {
-		return tagName;
+	public String getZipball() {
+		return zipball;
 	}
 
-	public boolean isPreRelease() {
-		return preRelease;
+	public String getTarball() {
+		return tarball;
 	}
 }

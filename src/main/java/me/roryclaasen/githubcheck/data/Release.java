@@ -13,51 +13,60 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package net.roryclaasen.githubcheck.data;
-
-import net.roryclaasen.util.exception.TagNotFoundException;
+package me.roryclaasen.githubcheck.data;
 
 import com.google.gson.JsonObject;
 
+import me.roryclaasen.util.exception.TagNotFoundException;
 /**
  * @author Rory Claasen
  */
-public class Tag extends JSONData {
+public class Release extends JSONData {
 
-	private String name, zipball, tarball;
-
-	public Tag(JsonObject object) {
+	public Release(JsonObject object) {
 		super(object);
 	}
 
+	private String url, name, tagName;
+	private boolean preRelease;
+
 	@Override
 	protected void load(JsonObject object) throws TagNotFoundException {
+		if (hasKey("url")) {
+			url = object.get("url").getAsString();
+		} else {
+			throw new TagNotFoundException("Key not found (url)");
+		}
 		if (hasKey("name")) {
 			name = object.get("name").getAsString();
 		} else {
 			throw new TagNotFoundException("Key not found (name)");
 		}
-		if (hasKey("zipball_url")) {
-			zipball = object.get("zipball_url").getAsString();
+		if (hasKey("tag_name")) {
+			tagName = object.get("tag_name").getAsString();
 		} else {
-			throw new TagNotFoundException("Key not found (zipball_url)");
+			throw new TagNotFoundException("Key not found (tag_name)");
 		}
-		if (hasKey("tarball_url")) {
-			tarball = object.get("tarball_url").getAsString();
+		if (hasKey("prerelease")) {
+			preRelease = object.get("prerelease").getAsBoolean();
 		} else {
-			throw new TagNotFoundException("Key not found (tarball_url)");
+			throw new TagNotFoundException("Key not found (prerelease)");
 		}
+	}
+
+	public String getUrl() {
+		return url;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getZipball() {
-		return zipball;
+	public String getTagName() {
+		return tagName;
 	}
 
-	public String getTarball() {
-		return tarball;
+	public boolean isPreRelease() {
+		return preRelease;
 	}
 }

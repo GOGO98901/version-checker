@@ -1,8 +1,8 @@
-package net.roryclaasen.githubcheck.data;
-
-import net.roryclaasen.util.exception.TagNotFoundException;
+package me.roryclaasen.githubcheck.data;
 
 import com.google.gson.JsonObject;
+
+import me.roryclaasen.util.exception.TagNotFoundException;
 /**
  * @author Rory Claasen
  */

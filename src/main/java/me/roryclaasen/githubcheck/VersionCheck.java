@@ -13,15 +13,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
  */
-package net.roryclaasen.githubcheck;
-
-import net.roryclaasen.githubcheck.data.Release;
-import net.roryclaasen.githubcheck.data.Tag;
-import net.roryclaasen.util.Reader;
+package me.roryclaasen.githubcheck;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import me.roryclaasen.githubcheck.data.Release;
+import me.roryclaasen.githubcheck.data.Tag;
+import me.roryclaasen.util.Reader;
 
 /**
  * @author Rory Claasen
