@@ -1,5 +1,14 @@
 # exclude all
 /*
+
+# need gradle
+!libs/
+!gradle/
+!gradlew
+!gradlew.bat
+!build.gradle
+!gradle.properties
+
 # include mnarkdown
 !LICENSE
 
