@@ -1,10 +1,20 @@
+ buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+   }
+}
+
 plugins {
 	id 'java'
 	id 'eclipse'
 	id 'maven'
 }
 
+apply plugin: 'maven-publish'
+
 repositories {
+    mavenCentral()
     jcenter()
 }
 
