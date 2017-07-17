@@ -1,6 +1,7 @@
 plugins {
 	id 'java'
 	id 'eclipse'
+	id 'maven'
 }
 
 repositories {
@@ -14,5 +15,8 @@ targetCompatibility = JavaVersion.VERSION_1_8
 dependencies {
 	compile group: 'com.google.code.gson', name: 'gson', version: '1.7.2'
 }
+
+group = 'me.github.GOGO98901'
+
 version = "2.0"
 archivesBaseName =  "Version-Checker-${version}"
