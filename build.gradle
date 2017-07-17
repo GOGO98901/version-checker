@@ -19,4 +19,5 @@ dependencies {
 group = 'me.github.GOGO98901'
 
 version = "2.0"
+artifact = "Version-Checker"
 archivesBaseName =  "Version-Checker-${version}"
